@@ -13,10 +13,7 @@ function onOpen() {
         .addItem(lang === 'ja' ? '設定シート作成' : 'Create config sheets', 'initialize')
     )
     .addSeparator()
-    .addItem(
-      lang === 'ja' ? 'メールを削除する' : 'Purge Email',
-      'purgeEmail'
-    )
+    .addItem(lang === 'ja' ? 'メールを削除する' : 'Purge Email', 'purgeEmail')
     .addItem(lang === 'ja' ? 'スケジュール実行' : 'Schedule', 'createSchedule')
     .addToUi();
 }

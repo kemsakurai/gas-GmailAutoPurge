@@ -7,7 +7,7 @@ export const initialize = (): void => {
   if (!sheet) {
     sheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet();
     sheet.setName(configSheetName);
-    const range = sheet.getRange('A1:C1');
+    const range = sheet.getRange('A1:D1');
     range.setBackground('yellow');
     const headers: string[] = new Array();
     headers.push('Notes');

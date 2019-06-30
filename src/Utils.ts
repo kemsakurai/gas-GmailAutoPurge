@@ -15,13 +15,19 @@ export default class Utils {
   }
   /**
    * convertCellValue2Boolean
-   * @param value 
+   * @param value
    */
-  public static convertCellValue2Boolean(value: string) :boolean {
-    if("TRUE" == value.toUpperCase()) {
+  public static convertCellValue2Boolean(value: string): boolean {
+    if (typeof value === 'undefined') {
+      return false;
+    }
+    if (typeof value === 'boolean') {
+      return value;
+    }
+    if ('TRUE' == value.toUpperCase()) {
       return true;
     }
-    if("1" == value) {
+    if ('1' == value) {
       return true;
     }
     return false;
