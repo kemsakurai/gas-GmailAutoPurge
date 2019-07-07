@@ -7,18 +7,19 @@ export const purgeEmail = (): void => {
     Utils.getConfigSheetName()
   );
 
-  let range: GoogleAppsScript.Spreadsheet.Range = sheet.getRange(2, 1, sheet.getLastRow() - 1, 4);
+  let range: GoogleAppsScript.Spreadsheet.Range = sheet.getRange(2, 1, sheet.getLastRow() - 1, 5);
   let queries: any[][] = range.getValues();
 
   for (let elem of queries) {
     // Notes、Query、Leave starred email の設定がなければ、処理の対象外
-    if (elem[0] == '' || elem[1] == '' || elem[2] == '' || elem[3] == '') {
+    if (elem[0] == '' || elem[1] == '' || elem[2] == '' || elem[3] == '' || elem[4] == '') {
       continue;
     }
 
     let age = new Date();
     age.setDate(age.getDate() - elem[2]);
     let leaveStarredEmail = Utils.convertCellValue2Boolean(elem[3]);
+    let leaveImportantEmail = Utils.convertCellValue2Boolean(elem[4]);
     let purge = Utilities.formatDate(age, Session.getTimeZone(), 'yyyy-MM-dd');
     let search = 'label:' + elem[1] + ' before:' + purge;
 
@@ -30,8 +31,10 @@ export const purgeEmail = (): void => {
       // An email thread may have multiple messages and the timestamp of
       // individual messages can be different.
       for (let i = 0; i < threads.length; i++) {
+        if (leaveImportantEmail && threads[i].isImportant()) {
+          continue;
+        }
         let messages = GmailApp.getMessagesForThread(threads[i]);
-
         for (let j = 0; j < messages.length; j++) {
           let email = messages[j];
           if (leaveStarredEmail && email.isStarred()) {
