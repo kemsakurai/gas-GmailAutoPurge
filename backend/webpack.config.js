@@ -1,5 +1,6 @@
 const path = require('path');
 const GasPlugin = require("gas-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -31,8 +32,15 @@ module.exports = {
   plugins: [
     new GasPlugin(),
     new HtmlWebpackPlugin({
-      filename: "./index.html",
-      template: "./src/index.html"
-    })
+      filename: "./createSchedule.html",
+      template: "./src/createSchedule.html"
+    }),
+    new CopyWebpackPlugin([
+      {
+        from: "../frontend/dist/frontend/index.html",
+        to: "./index.html",
+        toType: 'file'
+      }
+    ])   
   ]
 };

@@ -2,6 +2,7 @@ import { initialize } from './initialize';
 import { createSchedule } from './createSchedule';
 import { updateSchedule } from './updateSchedule';
 import { purgeEmail } from './purgeEmail';
+import doGet from './doGet';
 
 function onOpen() {
   var lang = Session.getActiveUserLocale();
@@ -24,3 +25,4 @@ global.initialize = initialize;
 global.purgeEmail = purgeEmail;
 global.createSchedule = createSchedule;
 global.updateSchedule = updateSchedule;
+global.doGet = doGet;
