@@ -1,8 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const WebpackCdnPlugin = require('webpack-cdn-plugin');
-const glob = require('glob');
-const path = require('path');
 
 module.exports = {
     // cdn から取得する対象のライブラリを、externals に指定する
@@ -14,19 +12,6 @@ module.exports = {
         "@angular/platform-browser": "ng.platformBrowser",
         "@angular/router": "ng.router"
     },
-    module : {
-    rules: [{
-      test: /\.scss$/,
-      use: [ { loader: 'style-loader'}, { loader: 'css-loader'},
-      {   loader: 'sass-loader',
-          options: {
-            sourceMap: true,
-            includePaths: glob.sync('node_modules').map((d) => path.join(__dirname, d)),
-          }
-      }  
-      ],  
-    }],
-    },  
     plugins: [
         new HtmlWebpackPlugin({
                   filename: 'index.html',

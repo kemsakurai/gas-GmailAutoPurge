@@ -6,36 +6,230 @@
   <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
 <h2>Here are some links to help you start: </h2>
-<div class="mdc-data-table">
-  <table class="mdc-data-table__table" aria-label="Dessert calories">
-    <thead>
-      <tr class="mdc-data-table__header-row">
-        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Dessert</th>
-        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Carbs (g)</th>
-        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Protein (g)</th>
-        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Comments</th>
-      </tr>
-    </thead>
-    <tbody class="mdc-data-table__content">
-      <tr class="mdc-data-table__row">
-        <td class="mdc-data-table__cell">Frozen yogurt</td>
-        <td class="mdc-data-table__cell mdc-data-table__cell--numeric">24</td>
-        <td class="mdc-data-table__cell mdc-data-table__cell--numeric">4.0</td>
-        <td class="mdc-data-table__cell">Super tasty</td>
-      </tr>
-      <tr class="mdc-data-table__row">
-        <td class="mdc-data-table__cell">Ice cream sandwich</td>
-        <td class="mdc-data-table__cell mdc-data-table__cell--numeric">37</td>
-        <td class="mdc-data-table__cell mdc-data-table__cell--numeric">4.3</td>
-        <td class="mdc-data-table__cell">I like ice cream more</td>
-      </tr>
-      <tr class="mdc-data-table__row">
-        <td class="mdc-data-table__cell">Eclair</td>
-        <td class="mdc-data-table__cell mdc-data-table__cell--numeric">24</td>
-        <td class="mdc-data-table__cell mdc-data-table__cell--numeric">6.0</td>
-        <td class="mdc-data-table__cell">New filing flavor</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="mdc-card demo-card">
+  <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
+    <div class="mdc-card__media mdc-card__media--16-9 demo-card__media" style="background-image: url(&quot;https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg&quot;);"></div>
+    <div class="demo-card__primary">
+      <h2 class="demo-card__title mdc-typography mdc-typography--headline6">Our Changing Planet</h2>
+      <h3 class="demo-card__subtitle mdc-typography mdc-typography--subtitle2">by Kurt Wagner</h3>
+    </div>
+    <div class="demo-card__secondary mdc-typography mdc-typography--body2">Visit ten places on our planet that are undergoing the biggest changes today.</div>
+  </div>
+  <div class="mdc-card__actions">
+    <div class="mdc-card__action-buttons">
+      <button class="mdc-button mdc-card__action mdc-card__action--button">Read</button>
+      <button class="mdc-button mdc-card__action mdc-card__action--button">Bookmark</button>
+    </div>
+    <div class="mdc-card__action-icons">
+      <button class="mdc-icon-button mdc-card__action mdc-card__action--icon--unbounded" aria-pressed="false" aria-label="Add to favorites" title="Add to favorites">
+        <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">favorite</i>
+        <i class="material-icons mdc-icon-button__icon">favorite_border</i>
+      </button>
+      <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="Share" data-mdc-ripple-is-unbounded="true">share</button>
+      <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="More options" data-mdc-ripple-is-unbounded="true">more_vert</button>
+    </div>
+  </div>
+</div>
+<div class="mdc-typography">
+  <div class="mdc-data-table">
+    <table class="mdc-data-table__content">
+      <thead>
+        <tr>
+          <th class="mdc-data-table--sortable" aria-label="Test ARIA label">Test sortable</th>
+          <th class="mdc-data-table--sortable" aria-label="Test ARIA label">Test sortable</th>
+          <th class="mdc-data-table--sortable mdc-data-table--numeric" aria-label="Test ARIA label">Test sortable</th>
+          <th class="mdc-data-table--numeric" aria-label="Test ARIA label">Not sortable</th>
+          <th class="mdc-data-table--numeric" aria-label="Test ARIA label">Not sortable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Test 1</td>
+          <td class="mdc-data-table--numeric">0.19699849062334462</td>
+          <td class="mdc-data-table--numeric">0.19959718237374502</td>
+          <td class="mdc-data-table--numeric">0.5003942828157175</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Test 2</td>
+          <td class="mdc-data-table--numeric">0.9130759658041363</td>
+          <td class="mdc-data-table--numeric">0.27635257261671997</td>
+          <td class="mdc-data-table--numeric">0.6739640601301302</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Test 3</td>
+          <td class="mdc-data-table--numeric">0.4289857156163077</td>
+          <td class="mdc-data-table--numeric">0.029009350531988165</td>
+          <td class="mdc-data-table--numeric">0.6363851484142975</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Test 4</td>
+          <td class="mdc-data-table--numeric">0.2067025488097618</td>
+          <td class="mdc-data-table--numeric">0.6022827710562739</td>
+          <td class="mdc-data-table--numeric">0.45847510365020305</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Test 5</td>
+          <td class="mdc-data-table--numeric">0.4886199665688846</td>
+          <td class="mdc-data-table--numeric">0.5564402891076481</td>
+          <td class="mdc-data-table--numeric">0.2924964769461027</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mdc-data-table mdc-data-table--dark">
+    <table class="mdc-data-table__content">
+      <thead>
+        <tr>
+          <th class="mdc-data-table--sortable" aria-label="Test ARIA label">Test sortable</th>
+          <th class="mdc-data-table--sortable" aria-label="Test ARIA label">Test sortable</th>
+          <th class="mdc-data-table--sortable mdc-data-table--numeric" aria-label="Test ARIA label">Test sortable</th>
+          <th class="mdc-data-table--numeric" aria-label="Test ARIA label">Not sortable</th>
+          <th class="mdc-data-table--numeric" aria-label="Test ARIA label">Not sortable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Test 1</td>
+          <td class="mdc-data-table--numeric">0.5841672251070684</td>
+          <td class="mdc-data-table--numeric">0.3133670227087155</td>
+          <td class="mdc-data-table--numeric">0.2925677394992534</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Test 2</td>
+          <td class="mdc-data-table--numeric">0.2427371450316933</td>
+          <td class="mdc-data-table--numeric">0.3952432363397953</td>
+          <td class="mdc-data-table--numeric">0.7876613874818426</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Test 3</td>
+          <td class="mdc-data-table--numeric">0.9869318436535359</td>
+          <td class="mdc-data-table--numeric">0.6244815107581319</td>
+          <td class="mdc-data-table--numeric">0.5454815438984717</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Test 4</td>
+          <td class="mdc-data-table--numeric">0.9668836503231855</td>
+          <td class="mdc-data-table--numeric">0.28538419125850245</td>
+          <td class="mdc-data-table--numeric">0.08490583089776438</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Test 5</td>
+          <td class="mdc-data-table--numeric">0.8968906519198854</td>
+          <td class="mdc-data-table--numeric">0.4333360944020843</td>
+          <td class="mdc-data-table--numeric">0.2752742518831013</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mdc-data-table" dir="rtl">
+    <table class="mdc-data-table__content">
+      <thead>
+        <tr>
+          <th class="mdc-data-table--sortable" aria-label="Test ARIA label">Test sortable</th>
+          <th class="mdc-data-table--sortable" aria-label="Test ARIA label">Test sortable</th>
+          <th class="mdc-data-table--sortable mdc-data-table--numeric" aria-label="Test ARIA label">Test sortable</th>
+          <th class="mdc-data-table--numeric" aria-label="Test ARIA label">Not sortable</th>
+          <th class="mdc-data-table--numeric" aria-label="Test ARIA label">Not sortable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Test 1</td>
+          <td class="mdc-data-table--numeric">0.8887914346663848</td>
+          <td class="mdc-data-table--numeric">0.005614741676883694</td>
+          <td class="mdc-data-table--numeric">0.2226694677984129</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Test 2</td>
+          <td class="mdc-data-table--numeric">0.3981335531419683</td>
+          <td class="mdc-data-table--numeric">0.003686109237133861</td>
+          <td class="mdc-data-table--numeric">0.9963706262206096</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Test 3</td>
+          <td class="mdc-data-table--numeric">0.031521556386410854</td>
+          <td class="mdc-data-table--numeric">0.15056989680076693</td>
+          <td class="mdc-data-table--numeric">0.7215558434632026</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Test 4</td>
+          <td class="mdc-data-table--numeric">0.81033816612885</td>
+          <td class="mdc-data-table--numeric">0.46373163288522523</td>
+          <td class="mdc-data-table--numeric">0.7452995740233157</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Test 5</td>
+          <td class="mdc-data-table--numeric">0.07827367910900707</td>
+          <td class="mdc-data-table--numeric">0.011938893639323878</td>
+          <td class="mdc-data-table--numeric">0.6330205594663727</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mdc-data-table mdc-data-table--dark" dir="rtl">
+    <table class="mdc-data-table__content">
+      <thead>
+        <tr>
+          <th class="mdc-data-table--sortable" aria-label="Test ARIA label">Test sortable</th>
+          <th class="mdc-data-table--sortable" aria-label="Test ARIA label">Test sortable</th>
+          <th class="mdc-data-table--sortable mdc-data-table--numeric" aria-label="Test ARIA label">Test sortable</th>
+          <th class="mdc-data-table--numeric" aria-label="Test ARIA label">Not sortable</th>
+          <th class="mdc-data-table--numeric" aria-label="Test ARIA label">Not sortable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Test 1</td>
+          <td class="mdc-data-table--numeric">0.7305349892614581</td>
+          <td class="mdc-data-table--numeric">0.34312322484595414</td>
+          <td class="mdc-data-table--numeric">0.39649574710152957</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Test 2</td>
+          <td class="mdc-data-table--numeric">0.9397504467966735</td>
+          <td class="mdc-data-table--numeric">0.7889433792880447</td>
+          <td class="mdc-data-table--numeric">0.8915861723240774</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Test 3</td>
+          <td class="mdc-data-table--numeric">0.4852294142434699</td>
+          <td class="mdc-data-table--numeric">0.35868564098381883</td>
+          <td class="mdc-data-table--numeric">0.5286678422535078</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Test 4</td>
+          <td class="mdc-data-table--numeric">0.05027113922476878</td>
+          <td class="mdc-data-table--numeric">0.5798297024739767</td>
+          <td class="mdc-data-table--numeric">0.538988718049979</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Test 5</td>
+          <td class="mdc-data-table--numeric">0.9544886330901581</td>
+          <td class="mdc-data-table--numeric">0.07645586471221577</td>
+          <td class="mdc-data-table--numeric">0.4898560497723379</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 <router-outlet></router-outlet>
