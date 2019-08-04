@@ -4,24 +4,4 @@
     {{ title }} 
   </h1>
 </div>
-<div class="mdc-typography">
-  <div class="mdc-data-table">
-    <table class="mdc-data-table__content">
-      <thead>
-        <tr *ngIf="headerColumns">
-            <th class="mdc-data-table--sortable" *ngFor="let headerColumn of headerColumns">{{ headerColumn.title }}</th>
-        </tr>
-      </thead>
-      <tbody *ngIf="tableRows">
-          <tr *ngFor="let tableRow of tableRows">
-              <td>{{ tableRow['Notes'] }}</td>
-              <td>{{ tableRow['label'] }}</td>
-              <td class="mdc-data-table--numeric">{{ tableRow['Retention period'] }}</td>
-              <td>{{ tableRow['Leave starred email'] }}</td>
-              <td>{{ tableRow['Leave important email'] }}</td>
-          </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
 <router-outlet></router-outlet>

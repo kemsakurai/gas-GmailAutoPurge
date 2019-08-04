@@ -1,7 +1,7 @@
 import Utils from './Utils';
 
-export const getSettings = (): Object => {
-  console.info('getSettings start');
+export const getConfigs = (): Object => {
+  console.info('getConfigs start');
   const configSheetName: string = Utils.getConfigSheetName();
   let sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(configSheetName);
   let resultJson = new Array();
@@ -18,6 +18,6 @@ export const getSettings = (): Object => {
       return json;
     });
   }
-  console.info('getSettings end');
+  console.info('getConfigs end');
   return resultJson;
 };

@@ -1,0 +1,21 @@
+<div *ngIf="configRow">
+
+  <h2>{{configRow.label | uppercase}} Details</h2>
+  <div>
+    <label>notes:
+      <input [(ngModel)]="configRow.notes" placeholder="notes"/>
+    </label>
+    <label>label:
+      <input [(ngModel)]="configRow.label" placeholder="label"/>
+    </label>
+    <label>retentionPeriod:
+      <input [(ngModel)]="configRow.retentionPeriod" placeholder="retentionPeriod"/>
+    </label>
+    <label>leaveStarredEmail:
+      <input [(ngModel)]="configRow.leaveStarredEmail" placeholder="leaveStarredEmail"/>
+    </label>
+    <label>leaveImportantEmail:
+      <input [(ngModel)]="configRow.leaveImportantEmail" placeholder="leaveImportantEmail"/>
+    </label>
+  </div>
+</div>

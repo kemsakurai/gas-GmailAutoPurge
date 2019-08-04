@@ -2,7 +2,8 @@ import { initialize } from './initialize';
 import { createSchedule } from './createSchedule';
 import { updateSchedule } from './updateSchedule';
 import { purgeEmail } from './purgeEmail';
-import { getSettings } from './getSettings';
+import { getConfigs } from './getConfigs';
+import { getConfig } from './getConfig';
 import doGet from './doGet';
 
 function onOpen() {
@@ -27,4 +28,5 @@ global.purgeEmail = purgeEmail;
 global.createSchedule = createSchedule;
 global.updateSchedule = updateSchedule;
 global.doGet = doGet;
-global.getSettings = getSettings;
+global.getConfigs = getConfigs;
+global.getConfig = getConfig;

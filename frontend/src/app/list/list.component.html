@@ -1,0 +1,26 @@
+<div class="mdc-typography">
+  <div class="mdc-data-table">
+    <table class="mdc-data-table__content">
+      <thead>
+        <tr *ngIf="headerColumns">
+            <th class="mdc-data-table--sortable" *ngFor="let headerColumn of headerColumns">{{ headerColumn.title }}</th>
+            <th></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="tableRows">
+          <tr *ngFor="let tableRow of tableRows">
+              <td>{{ tableRow.notes }}</td>
+              <td>{{ tableRow.label }}</td>
+              <td class="mdc-data-table--numeric">{{ tableRow.retentionPeriod }}</td>
+              <td>{{ tableRow.leaveStarredEmail }}</td>
+              <td>{{ tableRow.leaveImportantEmail }}</td>
+              <td>
+                <a routerLink="/userCodeAppPanel/detail/{{tableRow.label}}">
+                  <span class="badge">{{tableRow.label}}</span> Edit
+                </a>
+              </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

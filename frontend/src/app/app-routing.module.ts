@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
+import { ListComponent } from './list/list.component';
+import { DetailComponent } from './detail/detail.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent, pathMatch: 'full' },
-  // root 以外の path を 空コンポーネントにマッピングしておく
-  { path: '**', children: [] }
+  { path: 'userCodeAppPanel', component: ListComponent, pathMatch: 'full' },
+  { path: 'userCodeAppPanel/detail/:id', component: DetailComponent , pathMatch: 'full'},
+  { path: '**', component:  PageNotFoundComponent}
 ];
 
 @NgModule({
