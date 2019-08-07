@@ -24,6 +24,7 @@ module.exports = {
                     removeScriptTypeAttributes: false
                   }
             }),
+        
         new HtmlWebpackInlineSourcePlugin(),
         // Angular 関連のライブラリはCDNから取得する
         new WebpackCdnPlugin({

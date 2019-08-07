@@ -1,21 +1,36 @@
-<div *ngIf="configRow">
-
-  <h2>{{configRow.label | uppercase}} Details</h2>
-  <div>
-    <label>notes:
-      <input [(ngModel)]="configRow.notes" placeholder="notes"/>
-    </label>
-    <label>label:
-      <input [(ngModel)]="configRow.label" placeholder="label"/>
-    </label>
-    <label>retentionPeriod:
-      <input [(ngModel)]="configRow.retentionPeriod" placeholder="retentionPeriod"/>
-    </label>
-    <label>leaveStarredEmail:
-      <input [(ngModel)]="configRow.leaveStarredEmail" placeholder="leaveStarredEmail"/>
-    </label>
-    <label>leaveImportantEmail:
-      <input [(ngModel)]="configRow.leaveImportantEmail" placeholder="leaveImportantEmail"/>
-    </label>
-  </div>
-</div>
+<form *ngIf="configRow">
+	<fieldset>
+	<legend>{{configRow.label | uppercase}} Details</legend>
+		<div class="form-group">
+			<label for="notes">Notes</label>
+			<input type="text" name="notes" [(ngModel)]="configRow.notes" placeholder="notes" class="form-control" aria-describedby="notesHelp">
+			<small id="notesHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+		</div>
+		<div class="form-group">
+			<label for="label">Label</label>
+			<input class="form-control" name="label" type="text" [(ngModel)]="configRow.label" placeholder="label" />
+		</div>
+		<div class="form-group">
+			<label for="retentionPeriod">Retention Period</label>
+			<input class="form-control" type="text" name="retentionPeriod" [(ngModel)]="configRow.retentionPeriod" placeholder="retentionPeriod" />
+		</div>
+		<div class="form-group">
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" name="leaveStarredEmail" [checked]="configRow.leaveStarredEmail" (change)="configRow.leaveStarredEmail = !configRow.leaveStarredEmail">
+				<label class="form-check-label" for="leaveStarredEmail">Leave Starred Email</label>
+				<span class="checkmark"></span>
+			</div>
+		</div>	
+		<div class="form-group">
+				<div class="form-check">
+				<input class="form-check-input" type="checkbox" name="leaveImportantEmail" [checked]="configRow.leaveImportantEmail" (change)="configRow.leaveImportantEmail = !configRow.leaveImportantEmail">
+				<label class="form-check-label" for="leaveImportantEmail">Leave Important Email</label>
+				<span class="checkmark"></span>
+				</div>
+		</div>
+	</fieldset>
+	<button type="submit" (click)="save()" class="btn btn-primary">Save</button>
+	<button (click)="goBack()" class="btn btn-secondary">Go back</button>
+	<!-- ダイアログコンポーネント -->
+	<app-dialog [dialogData]="parentData" (clickCloseButton)="closeDialog($event)" #dialog></app-dialog>
+</form>          

@@ -4,6 +4,7 @@ import { updateSchedule } from './updateSchedule';
 import { purgeEmail } from './purgeEmail';
 import { getConfigs } from './getConfigs';
 import { getConfig } from './getConfig';
+import { saveConfig } from './saveConfig';
 import doGet from './doGet';
 
 function onOpen() {
@@ -30,3 +31,4 @@ global.updateSchedule = updateSchedule;
 global.doGet = doGet;
 global.getConfigs = getConfigs;
 global.getConfig = getConfig;
+global.saveConfig = saveConfig;
