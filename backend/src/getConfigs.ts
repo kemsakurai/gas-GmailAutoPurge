@@ -9,12 +9,17 @@ export const getConfigs = (): Object => {
     let values = sheet.getDataRange().getValues();
     //タイトル行を取得する
     let title = values.splice(0, 1)[0];
+    title.unshift(['rowId']);
+
     //JSONデータを生成する
+    let rowId = 1;
     resultJson = values.map(function(row) {
       var json = {};
+      row.unshift([rowId]);
       row.map(function(item, index) {
         json[title[index]] = item;
       });
+      rowId++;
       return json;
     });
   }

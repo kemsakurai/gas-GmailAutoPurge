@@ -28,6 +28,7 @@ export class ListComponent implements OnInit {
     let tableRows = new Array();
     for (let item of resultData) {
       let configRow : ConfigRow = new ConfigRow();
+      configRow.rowId = item['rowId'];
       configRow.notes = item['Notes'];
       configRow.label = item['label'];
       configRow.retentionPeriod = item['Retention period'];

@@ -1,31 +1,23 @@
 import Utils from './Utils';
 
-export const getConfig = (label: string): Object => {
+export const getConfig = (rowId: number): Object => {
   console.info('getConfig start');
+  rowId = Number(rowId);
   const configSheetName: string = Utils.getConfigSheetName();
   let sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(configSheetName);
   let resultJson;
   if (sheet) {
-    let values = sheet.getDataRange().getValues();
     //タイトル行を取得する
-    let title = values.splice(0, 1)[0];
-    // labelと一致する行をフィルタリング
-    values = values.filter(value => label == value[1]);
-    console.log(values);
-    //JSONデータを生成する
-    resultJson = values.map(function(row) {
-      var json = {};
-      row.map(function(item, index) {
-        json[title[index]] = item;
-      });
-      return json;
+    let title = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    title.unshift('rowId');
+    let row = sheet.getRange(rowId + 1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    row.unshift(rowId);
+    console.log(row);
+    resultJson = {};
+    row.map(function(item, index) {
+      resultJson[title[index]] = item;
     });
   }
-  if (resultJson.length == 1) {
-    console.info(resultJson[0]);
-    return resultJson[0];
-  } else {
-    console.info(resultJson);
-    return null;
-  }
+  console.log(resultJson);
+  return resultJson;
 };

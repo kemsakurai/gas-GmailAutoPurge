@@ -10,17 +10,21 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent implements OnInit {
+  
   configRow: ConfigRow;
+  parentData :string = "hello";
+
   /** ここで子コンポーネントであるダイアログコンポーネントを取得しています */
   @ViewChild("dialog") dialogComponent: DialogComponent;
-  parentData :string = "hello";
+
+  
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private cd: ChangeDetectorRef
   ) { 
-      this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe(params => {
         const id = params.get('id');
         // snapshotを参照する
         if (!id) {
@@ -36,6 +40,7 @@ export class DetailComponent implements OnInit {
 
   bindData(result) {
     let row : ConfigRow = new ConfigRow();
+    row.rowId = result['rowId'];
     row.notes = result['Notes'];
     row.label = result['label'];
     row.retentionPeriod = result['Retention period'];
@@ -53,12 +58,12 @@ export class DetailComponent implements OnInit {
     google.script.run.withSuccessHandler(this.onSaveComplete.bind(this)).saveConfig(this.configRow);
   }
 
-  onSaveComplete() {
+  onSaveComplete(result) {
+    this.parentData = result;
+    this.cd.detectChanges();
     this.dialogComponent.openDialog();
   }
-  
   onCloseDialog() {
     this.location.back();
   }
-
 }

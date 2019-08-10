@@ -3,15 +3,14 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" (click)="lgModal.hide()"><span>×</span></button>
-        <h4 class="modal-title">テスト</h4>
+        <h5 class="modal-title">結果通知</h5>
       </div>
       <div class="modal-body">
-        <input type="text" [(ngModel)]="dialogData">
+        <p>{{dialogData}}</p>
       </div>
       <div class="modal-footer">   
-        <button type="button" class="btn btn-default" (click)="lgModal.hide()" data-dismiss="modal">キャンセル</button>
-        <button type="button" class="btn btn-info" (click)="onClose()" data-dismiss="modal">決定</button>
+        <button type="button" class="btn btn-secondary" (click)="lgModal.hide()" data-dismiss="modal">編集を続ける</button>
+        <button type="button" class="btn btn-info" (click)="onClose()" data-dismiss="modal">一覧へ戻る</button>
       </div>
     </div>
   </div>

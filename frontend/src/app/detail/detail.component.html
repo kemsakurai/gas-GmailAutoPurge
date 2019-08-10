@@ -29,8 +29,9 @@
 				</div>
 		</div>
 	</fieldset>
+	<input type="hidden" id="comment" name="comment" ng-value="confiwRow.rowId">
 	<button type="submit" (click)="save()" class="btn btn-primary">Save</button>
 	<button (click)="goBack()" class="btn btn-secondary">Go back</button>
 	<!-- ダイアログコンポーネント -->
-	<app-dialog [dialogData]="parentData" (clickCloseButton)="closeDialog($event)" #dialog></app-dialog>
+	<app-dialog [dialogData]="parentData" (clickCloseButton)="onCloseDialog($event)" #dialog></app-dialog>
 </form>          

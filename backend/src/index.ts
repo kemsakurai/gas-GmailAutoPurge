@@ -21,7 +21,6 @@ function onOpen() {
     .addItem(lang === 'ja' ? 'スケジュール実行' : 'Schedule', 'createSchedule')
     .addToUi();
 }
-
 declare let global: any;
 global.onOpen = onOpen;
 global.initialize = initialize;
