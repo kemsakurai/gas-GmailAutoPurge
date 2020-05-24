@@ -1,0 +1,199 @@
+/*********************************
+ *       import webpack plugins
+ ********************************/
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const GasPlugin = require('gas-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const WebpackCleanPlugin = require('webpack-clean');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const DynamicCdnWebpackPlugin = require('dynamic-cdn-webpack-plugin');
+const moduleToCdn = require('module-to-cdn');
+
+/*********************************
+ *       define file paths
+ ********************************/
+const destination = 'dist';
+const htmlTemplate = './src/client/template.html';
+
+/*********************************
+ *    client entry point paths
+ ********************************/
+ const clientEntrypoints = [
+  {
+    name: 'CLIENT - index',
+    entry: './src/client/index.tsx',
+    filename: 'index.html',
+  }
+];
+/*********************************
+ *       Declare settings
+ ********************************/
+
+// any shared client & server settings
+const sharedConfigSettings = {
+  performance: {
+    hints: 'warning',
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
+};
+
+// appscript copy settings, to copy this file over to the destination directory
+const appsscriptConfig = {
+  name: 'COPY APPSSCRIPT.JSON',
+  entry: './appsscript.json',
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: './appsscript.json',
+      },
+    ]),
+  ],
+};
+
+// config shared for all client settings
+const clientConfig = {
+  ...sharedConfigSettings,
+  output: {
+    path: path.resolve(__dirname, destination),
+  },
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx', '.json'],
+  },
+  module: {
+    rules: [
+      // turned off by default, but uncomment below to run linting during build
+      // eslintConfig,
+      {
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "ts-loader"
+          }
+        ]
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+};
+
+// config for EACH client entrypoint
+const clientConfigs = clientEntrypoints.map(clientEntrypoint => {
+  return {
+    ...clientConfig,
+    name: clientEntrypoint.name,
+    entry: clientEntrypoint.entry,
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: htmlTemplate,
+        filename: clientEntrypoint.filename,
+        inlineSource: '^[^(//)]+.(js|css)$', // embed all js and css inline, exclude packages with '//' for dynamic cdn insertion
+      }),
+      new HtmlWebpackInlineSourcePlugin(),
+      new WebpackCleanPlugin([path.join(destination, 'main.js')]),
+      new DynamicCdnWebpackPlugin({
+        // set "verbose" to true to print console logs on CDN usage while webpack builds
+        verbose: false,
+        resolver: (packageName, packageVersion, options) => {
+          const moduleDetails = moduleToCdn(
+            packageName,
+            packageVersion,
+            options
+          );
+          if (moduleDetails) {
+            return moduleDetails;
+          }
+          switch (packageName) {
+            case 'react-transition-group':
+              return {
+                name: packageName,
+                var: 'ReactTransitionGroup',
+                version: packageVersion,
+                url: `https://unpkg.com/react-transition-group/dist/react-transition-group.min.js`,
+              };
+            default:
+              return null;
+          }
+        },
+      }),
+    ],
+  };
+});
+
+const serverConfig = {
+  ...sharedConfigSettings,
+  name: 'SERVER',
+  entry: './src/server/index.ts',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, destination),
+    libraryTarget: 'this',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        use: 'ts-loader'
+      },
+      {
+        test: /\.html$/,
+        loader: "html-loader"
+      }      
+    ]
+  },
+  resolve: {
+    extensions: [
+      '.ts',
+      '.js'
+    ]    
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        sourceMap: true,
+        terserOptions: {
+          ecma: undefined,
+          warnings: false,
+          parse: {},
+          compress: {
+            properties: false,
+          },
+          mangle: false,
+          module: false,
+          output: {
+            beautify: true,
+          },
+          toplevel: false,
+          nameCache: null,
+          ie8: true,
+          keep_classnames: undefined,
+          keep_fnames: false,
+          safari10: false,
+        },
+      }),
+    ],
+  },
+  plugins: [
+    new GasPlugin(),
+    new HtmlWebpackPlugin({
+      filename: "./createSchedule.html",
+      template: "./src/server/createSchedule.html"
+    })
+  ],
+};
+
+module.exports = [
+  // 1. Copy the appscript file.
+  appsscriptConfig,
+  // 2. One client bundle for each client entrypoint.
+  ...clientConfigs,
+  // 3. Bundle the server
+  serverConfig,
+];
