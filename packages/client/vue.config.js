@@ -28,7 +28,6 @@ module.exports = defineConfig({
         }
         return args
       })
-
     //* CDNの設定 *//
     config.plugin('webpack-cdn').use(require('webpack-cdn-plugin'), [
       {
@@ -43,6 +42,20 @@ module.exports = defineConfig({
     ])
   },
   configureWebpack: {
+    module : { 
+      rules: [
+        {
+          test: /\.md$/,
+          exclude: /node_modules/,
+          use: [
+            'vue-loader',
+            {
+              loader: 'markdown-to-vue-loader'
+            },
+          ],
+        },
+      ],
+    },   
     // リリース時にはproductionにする
     output: {
       globalObject: 'this',

@@ -1,5 +1,21 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <span v-html="rawHtml"></span>
   </div>
 </template>
+
+<script lang="ts">
+// eslint-disable-next-line
+//import md from '../About.md';
+export default {
+  data() {
+    return {
+      // eslint-disable-next-line
+      // sourceで Rawデータが取得できます
+      // md,
+      rawHtml: 'Test',
+    };
+  },
+};
+
+</script>
