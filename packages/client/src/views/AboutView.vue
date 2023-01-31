@@ -1,5 +1,18 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="markdown-body">
+    <span v-html="rawHtml"></span>
   </div>
 </template>
+
+<script lang="ts">
+import { marked } from 'marked';
+import AboutMarkdown from '../About.md';
+
+export default {
+  data() {
+    return {
+      rawHtml: marked(AboutMarkdown.source),
+    };
+  },
+};
+</script>

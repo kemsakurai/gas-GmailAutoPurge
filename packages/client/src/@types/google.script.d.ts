@@ -32,8 +32,6 @@ declare namespace google {
             withUserObject(object: object): IRun;
         }
 
-
-
         interface IUrlLocation {
             /**
              * The string value of URL fragment after the # character, or an emptry string if no URL fragment is present
