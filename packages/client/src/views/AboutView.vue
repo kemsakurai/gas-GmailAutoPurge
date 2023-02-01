@@ -1,6 +1,8 @@
 <template>
-  <div class="markdown-body">
-    <span v-html="rawHtml"></span>
+  <div class="flex justify-center">
+    <article class="prose text-left">
+      <span v-html="rawHtml"></span>
+    </article>
   </div>
 </template>
 
