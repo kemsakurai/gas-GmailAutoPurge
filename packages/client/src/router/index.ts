@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/AboutView.vue';
+import SettingView from '../views/SettingView.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,6 +13,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/about',
     name: 'about',
     component: AboutView,
+  },
+  {
+    path: '/settings/:id',
+    name: 'setting',
+    component: SettingView,
   },
 ];
 

@@ -1,9 +1,10 @@
 import Utils from "./Utils";
 
 /* eslint-disable @typescript-eslint/ban-types */
-export const getConfig = (rowId: number): Object => {
-  console.info("getConfig start");
+export const getSetting = (rowId: number): Object => {
+  console.info("getSetting start");
   rowId = Number(rowId);
+  rowId = rowId++;
   const configSheetName: string = Utils.getConfigSheetName();
   const sheet =
     SpreadsheetApp.getActiveSpreadsheet().getSheetByName(configSheetName);

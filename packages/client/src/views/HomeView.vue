@@ -7,14 +7,24 @@
         <th>Notes</th>
         <th>Retention period</th>
         <th>label</th>
+        <th></th>
+        <th></th>
       </thead>
       <tbody>
-        <tr v-for='(setting , index) in settings' v-bind:key="index">
-          <td>{{ setting['Leave important email'] }}</td>
-          <td>{{ setting['Leave starred email'] }}</td>
-          <td>{{ setting['Notes'] }}</td>
-          <td>{{ setting['Retention period'] }}</td>
-          <td>{{ setting['label'] }}</td>
+        <tr v-for='(elem, index) in settings' v-bind:key="index">
+          <td>{{ elem['Leave important email'] }}</td>
+          <td>{{ elem['Leave starred email'] }}</td>
+          <td>{{ elem['Notes'] }}</td>
+          <td>{{ elem['Retention period'] }}</td>
+          <td>{{ elem['label'] }}</td>
+          <td>
+            <button class="btn btn-active" aria-pressed="true" @click="linkToSettings(index)">
+              編集
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-primary btn-active" aria-pressed="true">-</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -34,6 +44,10 @@ export default class HomeView extends Vue {
       this.settings = settings;
       console.log(this.settings);
     }).getSettings();
+  }
+
+  linkToSettings(index : number) {
+    this.$router.push({ path: `/settings/${index}` });
   }
 }
 </script>

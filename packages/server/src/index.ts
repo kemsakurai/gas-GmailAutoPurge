@@ -3,7 +3,7 @@ import { createSchedule } from "./createSchedule";
 import { updateSchedule } from "./updateSchedule";
 import { purgeEmail } from "./purgeEmail";
 import { getSettings } from "./getSettings";
-import { getConfig } from "./getConfig";
+import { getSetting } from "./getSetting";
 import { saveConfig } from "./saveConfig";
 import doGet from "./doGet";
 
@@ -24,18 +24,27 @@ function onOpen() {
     .addItem(lang === "ja" ? "スケジュール実行" : "Schedule", "createSchedule")
     .addToUi();
 }
-function test() {
-  return "test";
+function test_setting1() {
+  return getSetting(1);
+}
+
+function test_setting2() {
+  return getSetting(2);
+}
+function test_setting0() {
+  return getSetting(3);
 }
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare let global: any;
 global.onOpen = onOpen;
-global.test = test;
 global.initialize = initialize;
 global.purgeEmail = purgeEmail;
 global.createSchedule = createSchedule;
 global.updateSchedule = updateSchedule;
 global.doGet = doGet;
 global.getSettings = getSettings;
-global.getConfig = getConfig;
+global.getSetting = getSetting;
 global.saveConfig = saveConfig;
+global.test_setting0 = test_setting0;
+global.test_setting1 = test_setting1;
+global.test_setting2 = test_setting2;

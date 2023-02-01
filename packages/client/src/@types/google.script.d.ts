@@ -13,7 +13,7 @@ declare namespace google {
             updateSchedule(formData: any): void;
             doGet(e: any): void;
             getSettings(): void;
-            getConfig(rowId: number): void;
+            getSetting(rowId: number): void;
             saveConfig(configRow: any): void;
             /**
              * Sets a callback function to run if the server-side function throws an exception. Without a failure handler, failures are logged to the JavaScript console. To override this, call withFailureHandler(null) or supply a failure handler that does nothing.

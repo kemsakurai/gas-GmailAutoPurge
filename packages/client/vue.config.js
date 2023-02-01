@@ -39,9 +39,9 @@ module.exports = defineConfig({
             path: 'dist/vue.runtime.global.js',
           },
           {
-             name: 'marked',
-             var:  'marked',
-             path: 'lib/marked.umd.js'
+            name: 'marked',
+            var: 'marked',
+            path: 'lib/marked.umd.js',
           },
         ],
       },

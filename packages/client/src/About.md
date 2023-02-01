@@ -13,3 +13,9 @@ npm install
 sh build.sh && clasp push
 ```
 
+## Todo
+
+* 編集機能
+* 削除機能
+* 追加機能
+* スケジュール実行
