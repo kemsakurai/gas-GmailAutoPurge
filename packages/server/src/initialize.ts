@@ -2,6 +2,7 @@ import Utils from "./Utils";
 
 /**
  * Configシートを初期化し、削除ルールのテンプレートを作成します。
+ * 同時にバッチ処理のチェックポイント情報をリセットします。
  * 
  * **Configシートの項目構成**:
  * | 列 | 項目名 | 型 | 説明 |
@@ -43,5 +44,7 @@ export const initialize = (): void => {
     headers.push("Leave important email");
     range.setValues([headers]);
   }
+  // バッチ処理のチェックポイント情報をリセット
+  Utils.resetCheckpoint();
   console.info("initialize end");
 };
