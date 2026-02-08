@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint --fix src/**/*.ts",
     "test": "jest",
-    "build": "npm run lint && rimraf dist && webpack --mode production && cpx src/appsscript.json dist"
+    "build": "npm run lint && rimraf dist && webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -50,8 +50,5 @@
       "json",
       "node"
     ]
-  },
-  "dependencies": {
-    "cpx": "^1.5.0"
   }
 }

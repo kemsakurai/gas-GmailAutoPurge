@@ -1,0 +1,103 @@
+version: 2
+updates:
+  # Server dependencies
+  - package-ecosystem: "npm"
+    directory: "/packages/server"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    open-pull-requests-limit: 5
+    groups:
+      # TypeScript関連ツール（低リスク）
+      typescript-tooling:
+        patterns:
+          - "ts-loader"
+          - "ts-node"
+      # ESLint/Prettier（中リスク）
+      linting:
+        patterns:
+          - "eslint-config-*"
+          - "eslint-plugin-*"
+          - "@typescript-eslint/*"
+        exclude-patterns:
+          - "prettier"
+      # Webpack関連（個別管理）
+      webpack-plugins:
+        patterns:
+          - "copy-webpack-plugin"
+        exclude-patterns:
+          - "webpack"
+          - "webpack-cli"
+          - "gas-webpack-plugin"
+    ignore:
+      # メジャーアップデートは手動管理（GAS互換性確認必須）
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "webpack"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "webpack-cli"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "gas-webpack-plugin"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/google-apps-script"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "prettier"
+        update-types: ["version-update:semver-major"]
+
+  # Client dependencies
+  - package-ecosystem: "npm"
+    directory: "/packages/client"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    open-pull-requests-limit: 5
+    groups:
+      # Vue生態系（同時更新推奨）
+      vue-ecosystem:
+        patterns:
+          - "vue"
+          - "vue-router"
+          - "vuex"
+          - "@vue/cli-*"
+        exclude-patterns:
+          - "vue-class-component"
+      # ESLint プラグイン
+      linting:
+        patterns:
+          - "eslint-config-*"
+          - "eslint-plugin-*"
+          - "@typescript-eslint/*"
+          - "@vue/eslint-config-*"
+      # ビルドツール
+      build-tools:
+        patterns:
+          - "webpack-cdn-plugin"
+          - "markdown-to-vue-loader"
+    ignore:
+      # メジャーアップデートは手動管理
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "marked"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/marked"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "html-inline-script-webpack-plugin"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "vue-class-component"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+
+  # Root dependencies
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Tokyo"
+    open-pull-requests-limit: 3

@@ -26,7 +26,10 @@ module.exports = {
   plugins: [
     new GasPlugin(),
     new CopyPlugin({
-      patterns: [{ from: "./appsscript.json" }],
+      patterns: [
+        { from: "./appsscript.json" },
+        { from: "./src/*.html", to: "[name][ext]" }
+      ],
     })
   ],
 };
