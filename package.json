@@ -2,7 +2,5 @@
   "devDependencies": {
     "google-script-dts-generator": "^1.2.1"
   },
-  "scripts": {
-    "dts": "google-script-dts-generator --sourcesDir ./packages/server --outputDir ./packages/client/src/@types"
-  }
+  "scripts": {}
 }
