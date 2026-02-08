@@ -23,6 +23,27 @@ export interface TriggerInfo {
 }
 
 /**
+ * GAS成功結果の型定義
+ */
+interface GASSuccessResult {
+  success?: boolean;
+  error?: string;
+}
+
+/**
+ * GAS API ウィンドウの型定義
+ */
+interface GASWindow extends Window {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  google: {
+    script: {
+      run: any;
+    };
+  };
+  /* eslint-enable @typescript-eslint/no-explicit-any */
+}
+
+/**
  * Store State型定義
  */
 export interface AppState {
@@ -139,7 +160,7 @@ export default createStore<AppState>({
       commit('setError', null);
 
       return new Promise((resolve) => {
-        const gasWindow = window as any;
+        const gasWindow = window as unknown as GASWindow;
         gasWindow.google.script.run
           .withSuccessHandler((settings: ConfigRow[]) => {
             commit('setSettings', settings);
@@ -163,7 +184,7 @@ export default createStore<AppState>({
       commit('setError', null);
 
       return new Promise((resolve) => {
-        const gasWindow = window as any;
+        const gasWindow = window as unknown as GASWindow;
         gasWindow.google.script.run
           .withSuccessHandler((setting: ConfigRow) => {
             commit('setSetting', setting);
@@ -187,9 +208,9 @@ export default createStore<AppState>({
       commit('setError', null);
 
       return new Promise((resolve) => {
-        const gasWindow = window as any;
+        const gasWindow = window as unknown as GASWindow;
         gasWindow.google.script.run
-          .withSuccessHandler((result: any) => {
+          .withSuccessHandler((result: GASSuccessResult) => {
             commit('setLoading', false);
             if (result.success) {
               commit('setError', null);
@@ -212,12 +233,12 @@ export default createStore<AppState>({
     /**
      * 削除設定をサーバーに保存（更新）
      */
-    async updateSetting({ commit, dispatch }, configRow: ConfigRow) {
+    async updateSetting({ commit }, configRow: ConfigRow) {
       commit('setLoading', true);
       commit('setError', null);
 
       return new Promise((resolve) => {
-        const gasWindow = window as any;
+        const gasWindow = window as unknown as GASWindow;
         gasWindow.google.script.run
           .withSuccessHandler((result: string) => {
             commit('setLoading', false);
@@ -242,14 +263,14 @@ export default createStore<AppState>({
     /**
      * 削除設定をサーバーから削除
      */
-    async deleteSetting({ commit, dispatch }, rowId: number) {
+    async deleteSetting({ commit }, rowId: number) {
       commit('setLoading', true);
       commit('setError', null);
 
       return new Promise((resolve) => {
-        const gasWindow = window as any;
+        const gasWindow = window as unknown as GASWindow;
         gasWindow.google.script.run
-          .withSuccessHandler((result: any) => {
+          .withSuccessHandler((result: GASSuccessResult) => {
             commit('setLoading', false);
             if (result.success) {
               commit('setError', null);
@@ -277,7 +298,7 @@ export default createStore<AppState>({
       commit('setError', null);
 
       return new Promise((resolve) => {
-        const gasWindow = window as any;
+        const gasWindow = window as unknown as GASWindow;
         gasWindow.google.script.run
           .withSuccessHandler(() => {
             commit('setError', null);
@@ -300,7 +321,7 @@ export default createStore<AppState>({
       commit('setLoading', true);
 
       return new Promise((resolve) => {
-        const gasWindow = window as any;
+        const gasWindow = window as unknown as GASWindow;
         gasWindow.google.script.run
           .withSuccessHandler((triggerInfo: TriggerInfo | null) => {
             commit('setTriggerInfo', triggerInfo);

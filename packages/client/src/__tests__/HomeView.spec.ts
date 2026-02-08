@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { createStore } from 'vuex';
 import { createRouter, createMemoryHistory } from 'vue-router';
 import HomeView from '@/views/HomeView.vue';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import AddSettingDialog from '@/components/AddSettingDialog.vue';
 
 describe('HomeView', () => {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import store, { ConfigRow, TriggerInfo } from '@/store';
 
 describe('Vuex Store', () => {
@@ -185,6 +186,7 @@ describe('Vuex Store', () => {
     it('store has mutations and getters', () => {
       // Verify store structure
       expect(testStore.getters).toBeDefined();
+      // eslint-disable-next-line no-underscore-dangle
       expect(testStore._mutations).toBeDefined();
     });
 
@@ -197,6 +199,7 @@ describe('Vuex Store', () => {
     });
 
     it('actions are defined', () => {
+      // eslint-disable-next-line no-underscore-dangle
       expect(testStore._actions).toBeDefined();
     });
   });
@@ -235,8 +238,6 @@ describe('Vuex Store', () => {
     });
 
     it('addSetting mutation adds items to settings', () => {
-      const initialLength = testStore.state.settings.length;
-
       const newSetting: ConfigRow = {
         rowId: 999,
         Notes: 'Test',
@@ -249,8 +250,8 @@ describe('Vuex Store', () => {
       testStore.commit('addSettingLocal', newSetting);
 
       // Verify setting was added
-      const settings = testStore.state.settings as any[];
-      const added = settings.find((s: any) => s.rowId === 999);
+      const settings = testStore.state.settings as ConfigRow[];
+      const added = settings.find((s: ConfigRow) => s.rowId === 999);
       expect(added).toBeDefined();
     });
   });

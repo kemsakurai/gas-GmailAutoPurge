@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { createStore } from 'vuex';
 import { createRouter, createMemoryHistory } from 'vue-router';
 import SettingView from '@/views/SettingView.vue';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 describe('SettingView', () => {
   let mockStore: any;
