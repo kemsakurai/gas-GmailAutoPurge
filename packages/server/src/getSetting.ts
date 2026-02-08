@@ -1,5 +1,22 @@
 import Utils from "./Utils";
 
+/**
+ * Configシートから指定した行列インデックスに対応する削除ルールをJSONオブジェクトで取得します。
+ * 
+ * @param {number} rowId - 取得を希望する行列インデックス（0ベースリング索引）。
+ * @returns {Object} Configシートの行をキー項目組織に変換したオブジェクト。
+ * 次のkeyを持ちます:
+ * - rowId: 行列インデックス
+ * - Notes: 抜き記
+ * - label: Gmailラベル
+ * - Retention period: 保有期間（日数）
+ * - Leave starred email: スター付きメール保有
+ * - Leave important email: 接吻時モーク付きメール保有
+ * 
+ * @example
+ * getSetting(0); // 行2が、JSONイメージで返る
+ * // { rowId: 0, Notes: "Old emails", label: "Inbox", Retention period: 30, ... }
+ */
 /* eslint-disable @typescript-eslint/ban-types */
 export const getSetting = (rowId: number): Object => {
   console.info("getSetting start");

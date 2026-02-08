@@ -1,5 +1,23 @@
 import Utils from "./Utils";
 
+/**
+ * Configシートの削除ルールを基づいて、Gmail上の系統的にメールを削除します。
+ * 
+ * **処理フロー**:
+ * 1. Configシートからすべてを計算に読んだます
+ * 2. 空行スキップします
+ * 3. 基準日を計算します（本日 - 保有期間）
+ * 4. Gmailを検索クエリを作成します: `label:<label> before:<YYYY-MM-DD>`
+ * 5. 検索結果まで最大50件を一括処理します（えぐ射時間上限回避）
+ * 6. 各メールを条件付けでフィルタします（スター付き、接吻時モーク付き保有）
+ * 7. 古いメールをゴミ箱に移動します
+ * 
+ * @returns {void}
+ * 
+ * @note 
+ * - 誤動きが起こった場合、例外を出力して次回実行まで遅延します。
+ * - 最大50件を一括に処理することで、GASの実行時間上限を回避できます。
+ */
 export const purgeEmail = (): void => {
   console.info("purgeEmail start");
   // eslint-disable-next-line

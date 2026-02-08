@@ -15,6 +15,9 @@ declare namespace google {
             getSettings(): void;
             getSetting(rowId: number): void;
             saveConfig(configRow: any): void;
+            deleteSetting(rowId: number): void;
+            addSetting(configRow: any): void;
+            getTriggerInfo(): void;
             /**
              * Sets a callback function to run if the server-side function throws an exception. Without a failure handler, failures are logged to the JavaScript console. To override this, call withFailureHandler(null) or supply a failure handler that does nothing.
              * @param callback a client-side callback function to run if the server-side function throws an exception; the Error object is passed to the function as the first argument, and the user object (if any) is passed as a second argument

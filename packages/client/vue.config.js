@@ -7,6 +7,12 @@ module.exports = defineConfig({
   publicPath: './',
   outputDir: path.resolve(__dirname, '../../dist'),
   chainWebpack: (config) => {
+    // Exclude test files from build
+    config.module
+      .rule('ts')
+      .exclude.add(/(__tests__|\.spec\.ts|\.test\.ts)/)
+      .end();
+
     //* HTMLの設定 *//
     config
       .plugin('html')

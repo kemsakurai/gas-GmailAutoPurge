@@ -19,6 +19,34 @@ type FormData = {
   dayOfMonth: number;
   minitueOfHour: number;
 };
+
+/**
+ * purgeEmail()関数の自動実行スケジュールを設定または変更します。
+ * 
+ * @param {Array<{name: string, value: any}>} formData - フォームデータ配列。以下のname属性を有するべき:
+ * - automate: 自動実行が有効かどうか。0=無効、他=有効
+ * - interval: 実行間隔を指定。以下の値:
+ *   - 0: 分数単位（minitueOfHourを指定）
+ *   - 1: 毎時実行
+ *   - 2: 毎日実行（hourOfDayを指定）
+ *   - 3: 週次実行（dayOfWeek、hourOfDayを指定）
+ *   - 4: 月次実行（dayOfMonth、hourOfDayを指定）
+ * - hourOfDay: 実行時を指定（0-23）
+ * - dayOfWeek: 実行曜日を指定（0=月...6=日）
+ * - dayOfMonth: 実行月日を指定（1-31）
+ * - minitueOfHour: 分数単位を指定（1、5、15、30など）
+ * 
+ * @throws {Error} formDataの不足が不正、または予不達のinterval値が指定された場合。
+ * 
+ * @example
+ * // 毎日朝9時に実行を伝える
+ * const formData = [
+ *   { name: 'automate', value: 1 },
+ *   { name: 'interval', value: 2 },
+ *   { name: 'hourOfDay', value: 9 }
+ * ];
+ * updateSchedule(formData);
+ */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const updateSchedule = (formData: any): void => {
   const data: FormData = toJson_(formData);

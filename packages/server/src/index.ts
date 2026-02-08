@@ -5,6 +5,9 @@ import { purgeEmail } from "./purgeEmail";
 import { getSettings } from "./getSettings";
 import { getSetting } from "./getSetting";
 import { saveConfig } from "./saveConfig";
+import { deleteSetting } from "./deleteSetting";
+import { addSetting } from "./addSetting";
+import { getTriggerInfo } from "./getTriggerInfo";
 import doGet from "./doGet";
 
 function onOpen() {
@@ -45,6 +48,9 @@ global.doGet = doGet;
 global.getSettings = getSettings;
 global.getSetting = getSetting;
 global.saveConfig = saveConfig;
+global.deleteSetting = deleteSetting;
+global.addSetting = addSetting;
+global.getTriggerInfo = getTriggerInfo;
 global.test_setting0 = test_setting0;
 global.test_setting1 = test_setting1;
 global.test_setting2 = test_setting2;

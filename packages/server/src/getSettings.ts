@@ -1,5 +1,23 @@
 import Utils from "./Utils";
 
+/**
+ * Configシートのすべての削除ルールをJSON配列で取得します。
+ * 
+ * @returns {Object[]} Configシートのすべてを、以下のkeyを持つオブジェクト配列。空行は含まれません。
+ * - rowId: 行列インデックス（1ベースリング索引）
+ * - Notes: 抜き記
+ * - label: Gmailラベル
+ * - Retention period: 保有期間（日数）
+ * - Leave starred email: スター付きメール保有
+ * - Leave important email: 接吻時モーク付きメール保有
+ * 
+ * @example
+ * getSettings(); 
+ * // [ 
+ * //   { rowId: 1, Notes: "Old emails", label: "Inbox", Retention period: 30, ... },
+ * //   { rowId: 2, Notes: "Archive emails", label: "Archive", Retention period: 60, ... }
+ * // ]
+ */
 /* eslint-disable @typescript-eslint/ban-types */
 export const getSettings = (): Object => {
   console.info("getSettings start");
