@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getSetting } from "../getSetting";
 
 // Mock SpreadsheetApp and console
@@ -104,11 +105,6 @@ describe("getSetting", () => {
   });
 
   test("should handle empty sheet gracefully", () => {
-    const mockSheet = {
-      getRange: jest.fn(),
-      getLastColumn: jest.fn(() => 5),
-    };
-
     const mockSpreadsheet = {
       getSheetByName: jest.fn(() => null), // No sheet found
     };

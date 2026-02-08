@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Utils from "../Utils";
 
 describe("Utils", () => {

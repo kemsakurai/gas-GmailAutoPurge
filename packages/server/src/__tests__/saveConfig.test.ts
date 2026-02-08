@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { saveConfig } from "../saveConfig";
 
 // Mock SpreadsheetApp
