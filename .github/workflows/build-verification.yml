@@ -1,0 +1,103 @@
+name: Build Verification
+
+on:
+  pull_request:
+    branches: [ master ]
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            packages/server/package-lock.json
+            packages/client/package-lock.json
+      
+      - name: Install root dependencies
+        run: npm ci
+      
+      - name: Install server dependencies
+        working-directory: ./packages/server
+        run: npm ci
+      
+      - name: Install client dependencies
+        working-directory: ./packages/client
+        run: npm ci
+      
+      - name: Run build script
+        run: sh build.sh
+      
+      - name: Verify build artifacts
+        run: |
+          echo "Checking for required build artifacts..."
+          test -f dist/Code.gs || { echo "❌ dist/Code.gs not found"; exit 1; }
+          test -f dist/index.html || { echo "❌ dist/index.html not found"; exit 1; }
+          test -f dist/appsscript.json || { echo "❌ dist/appsscript.json not found"; exit 1; }
+          test -f dist/createSchedule.html || { echo "❌ dist/createSchedule.html not found"; exit 1; }
+          echo "✅ All build artifacts found"
+      
+      - name: Check build artifact sizes
+        run: |
+          echo "📊 Build artifact sizes:"
+          ls -lh dist/
+          CODE_SIZE=$(stat -f%z dist/Code.gs || stat -c%s dist/Code.gs)
+          HTML_SIZE=$(stat -f%z dist/index.html || stat -c%s dist/index.html)
+          echo "Code.gs: $CODE_SIZE bytes"
+          echo "index.html: $HTML_SIZE bytes"
+          # Warn if index.html is larger than 2MB (inline asset bloat check)
+          if [ $HTML_SIZE -gt 2097152 ]; then
+            echo "⚠️  Warning: index.html is larger than 2MB (inline asset bloat detected)"
+          fi
+      
+      - name: Verify gas-webpack-plugin global functions
+        run: |
+          echo "🔍 Verifying GAS global function exports..."
+          grep -q "function onOpen" dist/Code.gs || { echo "❌ onOpen not found"; exit 1; }
+          grep -q "function initialize" dist/Code.gs || { echo "❌ initialize not found"; exit 1; }
+          grep -q "function doGet" dist/Code.gs || { echo "❌ doGet not found"; exit 1; }
+          grep -q "function purgeEmail" dist/Code.gs || { echo "❌ purgeEmail not found"; exit 1; }
+          echo "✅ All global functions exported correctly"
+      
+      - name: Verify HTML inline assets
+        run: |
+          echo "🔍 Verifying HTML inline assets..."
+          grep -q "<script>" dist/index.html || { echo "❌ No inline scripts found"; exit 1; }
+          grep -q "<style>" dist/index.html || { echo "❌ No inline styles found"; exit 1; }
+          # Check that Vue is loaded from CDN (not inlined)
+          grep -q "vue.runtime.global.js" dist/index.html || { echo "⚠️  Vue CDN not found (may be inlined)"; }
+          echo "✅ HTML assets verified"
+      
+      - name: Run linter (server)
+        working-directory: ./packages/server
+        run: npm run lint
+        continue-on-error: true
+      
+      - name: Run linter (client)
+        working-directory: ./packages/client
+        run: npm run lint
+        continue-on-error: true
+      
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: build-artifacts-node-${{ matrix.node-version }}
+          path: dist/
+          retention-days: 7
